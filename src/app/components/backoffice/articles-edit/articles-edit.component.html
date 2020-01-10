@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-6 mx-auto">
 
-      <form [formGroup]="artircleForm" (ngSubmit)="persistArticle()">
+      <form [formGroup]="artircleForm" (ngSubmit)="setArticle()">
         <div class="form-group">
             <label for="title">title</label>
             <input formControlName="title" id="title" type="text" class="form-control">

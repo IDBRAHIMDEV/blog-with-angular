@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/backoffice/login/login.component';
 import { RegisterComponent } from './components/backoffice/register/register.component';
@@ -9,9 +10,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: "blog", component: ArticlesListComponent  },
-  { path: "blog/create", component: ArticlesAddComponent  },
-  { path: "blog/:id/edit", component: ArticlesEditComponent  },
+  { path: "blog", children: [
+
+    { path: "", component: ArticlesListComponent  },
+    { path: "create", component: ArticlesAddComponent  },
+    { path: ":id/edit", component: ArticlesEditComponent  },
+
+  ], canActivate: [AuthGuard] },
   { path: "register", component: RegisterComponent  },
   { path: "login", component: LoginComponent  },
   { path: "**", component: PageNotFoundComponent }

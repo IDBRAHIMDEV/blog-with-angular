@@ -1,8 +1,9 @@
+import { ToastrService } from 'ngx-toastr';
 import { Article } from './../../../models/article';
 import { ArticleService } from './../../../services/article.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-articles-edit',
@@ -23,6 +24,8 @@ export class ArticlesEditComponent implements OnInit {
   id: string = "";
   constructor(
     private articleService: ArticleService,
+    private toastr: ToastrService,
+    private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -35,6 +38,19 @@ export class ArticlesEditComponent implements OnInit {
         .subscribe((res: Article) => {
           this.artircleForm.patchValue(res);
         })
+  }
+
+  setArticle() {
+    this.articleService.updateArticle(this.id, this.artircleForm.value)
+        .then(() => {
+          this.toastr.info('Updated', 'Article updated SuccessFully', {
+            timeOut: 5000,
+            positionClass: 'toast-bottom-left',
+            tapToDismiss: true
+          });
+           this.router.navigateByUrl('/blog')
+        })
+        .catch()
   }
 
 }

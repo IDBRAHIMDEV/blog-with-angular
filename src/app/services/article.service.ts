@@ -28,4 +28,8 @@ export class ArticleService {
     return this.afs.collection('articles').doc(id).valueChanges();
   }
 
+  updateArticle(id: string, data: Article) {
+    return this.afs.collection('articles').doc(id).update(data);
+  }
+
 }

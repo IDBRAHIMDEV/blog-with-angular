@@ -18,11 +18,11 @@
             <tbody>
                 <tr  *ngFor="let article of articles">
                     <td>
-                        <h3>{{ article.title }}</h3>
+                        <h3>{{ article.title | titlecase }}</h3>
                         <em>{{ article.body }}</em>
                     </td>
-                    <td>{{ article.created_at }}</td>
-                    <td>{{ article.price }}</td>
+                    <td>{{ article.created_at | date:'dd/MM/yyyy' }}</td>
+                    <td class="text-right">{{ article.price | currency:'GBP':'symbol':'2.3-3' }}</td>
                     <td nowrap>
                         <a [routerLink]="['/blog', article.id, 'edit']" class="btn btn-warning btn-sm mr-1">
                             <i class="fa fa-pencil"></i>
